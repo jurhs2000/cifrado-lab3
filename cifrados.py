@@ -32,3 +32,14 @@ def write_image(bits, image):
     for j in range(im.size[1]):
       pix[i, j] = int(bits[i*im.size[1]+j], 2)
   return im
+
+def wichman(s1,s2,s3):
+  t = 10
+  for i in range(1,t):
+    s1 = (171*s1) % 30269
+    s2 = (172*s2) % 30307
+    s3 = (170*s3) % 30323
+
+    v = (s1/30269.0 + s2/30307.0 + s3/30323.0) % 1
+    print(v)
+
