@@ -1,3 +1,5 @@
+
+#solo la ultima parte TODO
 def lgc(seed, a, b, N):
   t = 10
   k = format(seed, '08b')
@@ -35,11 +37,13 @@ def write_image(bits, image):
 
 def wichman(s1,s2,s3):
   t = 10
+  s = ''
   for i in range(1,t):
     s1 = (171*s1) % 30269
     s2 = (172*s2) % 30307
     s3 = (170*s3) % 30323
 
-    v = (s1/30269.0 + s2/30307.0 + s3/30323.0) % 1
-    print(v)
+    v = (s1/30269.0 + s2/30307.0 + s3/30323.0) %1
+    s += format(int(v*1e15),'08b')
+  return s
 
