@@ -44,6 +44,6 @@ def wichman(s1,s2,s3):
     s3 = (170*s3) % 30323
 
     v = (s1/30269.0 + s2/30307.0 + s3/30323.0) %1
-    s += format(int(v*1e15),'08b')
+    s += format(int(v*1e15),'08b')[-8:]
   return s
 

@@ -18,6 +18,7 @@ print(result)
 img = PIL.Image.open("camera.png")
 cifrados.wichman(134,1455,1132)
 print(len(cifrados.read_image(img)))
+print(cifrados.wichman(134,1455,1132))
 
 newImg = cifrados.write_image(img, result)
 
