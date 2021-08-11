@@ -1,6 +1,6 @@
 import numpy as np
 
-#solo la ultima parte TODO
+# Linear congruential generator
 def lgc(seed, a, b, N):
   t = 10
   k = format(seed, '08b')
@@ -13,6 +13,20 @@ def lgc(seed, a, b, N):
     return k
   else:
     print("N debe ser positivo")
+
+# Wichman-Hill generator
+def wichman(s1,s2,s3):
+  t = 10
+  s = ''
+  for i in range(1,t):
+    s1 = (171*s1) % 30269
+    s2 = (172*s2) % 30307
+    s3 = (170*s3) % 30323
+
+    v = (s1/30269.0 + s2/30307.0 + s3/30323.0) %1
+    s += format(int(v*1e15),'08b')[-8:]
+  return s
+
 
 # converts image to bits
 # receives an opened PIL image on "L" mode (8 bits)
@@ -35,15 +49,3 @@ def write_image(bits, image):
     imgArray[i] = int(bits[(i*8):(i*8)+8], 2)
   img = imgArray.reshape(np.array(image).shape)
   return img
-
-def wichman(s1,s2,s3):
-  t = 10
-  s = ''
-  for i in range(1,t):
-    s1 = (171*s1) % 30269
-    s2 = (172*s2) % 30307
-    s3 = (170*s3) % 30323
-
-    v = (s1/30269.0 + s2/30307.0 + s3/30323.0) %1
-    s += format(int(v*1e15),'08b')[-8:]
-  return s
