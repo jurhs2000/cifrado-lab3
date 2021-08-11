@@ -8,6 +8,7 @@
 import cifrados
 import matplotlib.pyplot as plt
 from PIL import Image
+import random
 
 def show_image(I):
     plt.figure()
@@ -28,7 +29,11 @@ show_image(I)
 
 # resultLGC_test = cifrados.lgc(a=3, b=3, N=7, seed=5, size=16) # Prueba de LGC retornando 16 bits
 # print(resultLGC_test)
-resultLGC = cifrados.lgc(a=1103515245, b=12345, N=(2**31-1), seed=53, size=len(imgBits))
+
+a= int(input('Ingrese a: '))
+b= int(input('Ingrese b: '))
+N= int(input('Ingrese N: '))
+resultLGC = cifrados.lgc(a=a, b=b, N=N, seed=53, size=len(imgBits))
 
 lgc_xor = cifrados.xor(imgBits, resultLGC)
 print('xor')
@@ -38,8 +43,10 @@ print(lgc_xor[:50])
 show_image(cifrados.write_image(lgc_xor, img))
 
 print('now wichman')
-resultWichman = cifrados.wichman(134,1455,1132,len(imgBits))
-print(len(resultWichman))
-print(len(imgBits))
+s1 = random.randint(0,30000)
+s2 = random.randint(0,30000)
+s3 = random.randint(0,30000)
+resultWichman = cifrados.wichman(s1,s2,s3,len(imgBits))
+
 wichman_xor = cifrados.xor(imgBits, resultWichman)
 show_image(cifrados.write_image(wichman_xor, img))
