@@ -1,18 +1,17 @@
 import numpy as np
 
 # Linear congruential generator
-def lgc(seed, a, b, N):
-  t = 10
-  k = format(seed, '08b')
+# seed, a, b, N and size must be positive int values
+def lgc(a, b, N, seed, size):
+  k = 1 # ultimos bits a tomar
+  t = int(size / k) # cantidad de iteraciones
   h = seed
-  if (N > 0):
-    for i in range(1, t):
-      bits = format((a * h + b) % N, '08b')
-      h = (a * h + b) % N
-      k += bits
-    return k
-  else:
-    print("N debe ser positivo")
+  cadena = ''
+  for _ in range(t):
+    bits = format(((a * h) + b) % N, '08b')
+    h = ((a * h) + b) % N
+    cadena += bits[-k:]
+  return cadena
 
 # Wichman-Hill generator
 def wichman(s1,s2,s3):
@@ -49,3 +48,8 @@ def write_image(bits, image):
     imgArray[i] = int(bits[(i*8):(i*8)+8], 2)
   img = imgArray.reshape(np.array(image).shape)
   return img
+
+# xor two strings of bits
+# returns a string of bits
+def xor(bits1, bits2):
+  return ''.join(str(int(bits1[i]) ^ int(bits2[i])) for i in range(len(bits1)))

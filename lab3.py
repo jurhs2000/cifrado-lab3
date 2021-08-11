@@ -9,20 +9,33 @@ import cifrados
 import matplotlib.pyplot as plt
 from PIL import Image
 
-resultLGC = cifrados.lgc(5, 3, 3, 7)
-print(f"LGC: {resultLGC}")
-
-resultWichman = cifrados.wichman(134,1455,1132)
-print(f"Wichman: {resultWichman}")
+def show_image(I):
+    plt.figure()
+    plt.imshow(I,cmap='gray')
+    plt.show()
 
 # load image as pixel array
 
 img = Image.open('camera.png').convert('L') # L = 8-bit pixels, black and white
 img.show()
 
-a = cifrados.read_image(img)
+imgBits = cifrados.read_image(img)
 
-I = cifrados.write_image(a, img)
-plt.figure()
-plt.imshow(I,cmap='gray')
-plt.show()
+I = cifrados.write_image(imgBits, img)
+show_image(I)
+
+# algorithms
+
+# resultLGC_test = cifrados.lgc(a=3, b=3, N=7, seed=5, size=16) # Prueba de LGC retornando 16 bits
+# print(resultLGC_test)
+resultLGC = cifrados.lgc(a=15, b=2, N=7, seed=53, size=len(imgBits))
+
+lgc_xor = cifrados.xor(imgBits, resultLGC)
+print('xor')
+print(resultLGC[:50])
+print(imgBits[:50])
+print(lgc_xor[:50])
+show_image(cifrados.write_image(lgc_xor, img))
+
+resultWichman = cifrados.wichman(134,1455,1132)
+print(f"Wichman: {resultWichman}")
