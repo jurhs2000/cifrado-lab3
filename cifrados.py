@@ -14,16 +14,17 @@ def lgc(a, b, N, seed, size):
   return cadena
 
 # Wichman-Hill generator
-def wichman(s1,s2,s3):
-  t = 10
+def wichman(s1,s2,s3,size):
+  k = 1
+  t = int(size/k)
   s = ''
-  for i in range(1,t):
+  for _ in range(t):
     s1 = (171*s1) % 30269
     s2 = (172*s2) % 30307
     s3 = (170*s3) % 30323
 
     v = (s1/30269.0 + s2/30307.0 + s3/30323.0) %1
-    s += format(int(v*1e15),'08b')[-8:]
+    s += format(int(v*1e15),'08b')[-k:]
   return s
 
 

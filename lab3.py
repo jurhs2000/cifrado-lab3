@@ -28,7 +28,7 @@ show_image(I)
 
 # resultLGC_test = cifrados.lgc(a=3, b=3, N=7, seed=5, size=16) # Prueba de LGC retornando 16 bits
 # print(resultLGC_test)
-resultLGC = cifrados.lgc(a=15, b=2, N=7, seed=53, size=len(imgBits))
+resultLGC = cifrados.lgc(a=1103515245, b=12345, N=(2**31-1), seed=53, size=len(imgBits))
 
 lgc_xor = cifrados.xor(imgBits, resultLGC)
 print('xor')
@@ -37,5 +37,9 @@ print(imgBits[:50])
 print(lgc_xor[:50])
 show_image(cifrados.write_image(lgc_xor, img))
 
-resultWichman = cifrados.wichman(134,1455,1132)
-print(f"Wichman: {resultWichman}")
+print('now wichman')
+resultWichman = cifrados.wichman(134,1455,1132,len(imgBits))
+print(len(resultWichman))
+print(len(imgBits))
+wichman_xor = cifrados.xor(imgBits, resultWichman)
+show_image(cifrados.write_image(wichman_xor, img))
