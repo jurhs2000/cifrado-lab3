@@ -1,4 +1,5 @@
-
+import numpy as np
+import re
 #solo la ultima parte TODO
 def lgc(seed, a, b, N):
   t = 10
@@ -16,24 +17,28 @@ def lgc(seed, a, b, N):
 # read image to bits
 # returns a full string of bits
 def read_image(image):
-  im = image
-  pix = im.load()
+  width, height = image.shape
   bits = ""
-  for i in range(im.size[0]):
-    for j in range(im.size[1]):
-      bits += '{0:08b}'.format(pix[i, j])
+  for i in range(0,width):
+    for j in range(0,height):
+      bits += '{0:08b}'.format(image[i,j])
   return bits
 
 # bits to image
 # receives a string of bits
 # returns a new image
 def write_image(bits, image):
-  im = image
-  pix = im.load()
-  for i in range(im.size[0]):
-    for j in range(im.size[1]):
-      pix[i, j] = int(bits[i*im.size[1]+j], 2)
-  return im
+
+  width, height= image.shape
+  I = np.zeros(width*height).astype(np.uint8)
+  bts = re.findall('.........',bits)
+
+  for i in range(0,len(bts)):
+    I[i] = int(bts[i],2)
+
+  I  = I.reshape((width, height))
+
+  return I
 
 def wichman(s1,s2,s3):
   t = 10
@@ -46,4 +51,7 @@ def wichman(s1,s2,s3):
     v = (s1/30269.0 + s2/30307.0 + s3/30323.0) %1
     s += format(int(v*1e15),'08b')[-8:]
   return s
+
+
+
 
