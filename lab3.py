@@ -18,7 +18,7 @@ def show_image(I):
 # load image as pixel array
 
 img = Image.open('camera.png').convert('L') # L = 8-bit pixels, black and white
-img.show()
+# img.show()
 
 imgBits = cifrados.read_image(img)
 
@@ -50,3 +50,8 @@ resultWichman = cifrados.wichman(s1,s2,s3,len(imgBits))
 
 wichman_xor = cifrados.xor(imgBits, resultWichman)
 show_image(cifrados.write_image(wichman_xor, img))
+
+resultLFSR = cifrados.lfsr(seed=format(53, '08b'), taps=[8], nbits=len(imgBits))
+lfsr_xor = cifrados.xor(imgBits, resultLFSR)
+print('now LFSR')
+show_image(cifrados.write_image(lfsr_xor, img))
