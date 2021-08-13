@@ -34,26 +34,20 @@ def wichman(s1, s2, s3, size):
 # LSFR generator
 
 def lfsr(seed, taps, nbits):
-    rbits = seed
-    bits = seed
-    xor = 0
+    rbits = ''
+    state = seed
     while len(rbits) < nbits:
+        xor = int(state[taps[0]-1])
         for t in taps:
-            xor += int(bits[t-1])
-        if xor % 2 == 0.0:
-            xor = 0 
-        else:
-            xor = 1
-        bits = str(xor) + bits[:-1]
-        xor = 0
-        rbits += bits
+            if t != taps[0]:
+                xor = xor ^ int(state[t-1])
+        rbits += state[-1:]
+        state = str(xor) + state[:-1]
     return rbits
-
 
 # converts image to bits
 # receives an opened PIL image on "L" mode (8 bits)
 # returns a full string of bits
-
 
 def read_image(image):
     image = np.array(image)

@@ -27,8 +27,8 @@ show_image(I)
 
 # algorithms
 
-# resultLGC_test = cifrados.lgc(a=3, b=3, N=7, seed=5, size=16) # Prueba de LGC retornando 16 bits
-# print(resultLGC_test)
+resultLGC_test = cifrados.lgc(a=3, b=3, N=7, seed=5, size=16) # Prueba de LGC retornando 16 bits
+print(resultLGC_test)
 
 a= int(input('Ingrese a: '))
 b= int(input('Ingrese b: '))
@@ -51,7 +51,7 @@ resultWichman = cifrados.wichman(s1,s2,s3,len(imgBits))
 wichman_xor = cifrados.xor(imgBits, resultWichman)
 show_image(cifrados.write_image(wichman_xor, img))
 
-resultLFSR = cifrados.lfsr(seed=format(53, '08b'), taps=[8], nbits=len(imgBits))
+resultLFSR = cifrados.lfsr(seed=format('110100011011011010111101'), taps=[2,5,7,10,15,11], nbits=len(imgBits))
 lfsr_xor = cifrados.xor(imgBits, resultLFSR)
 print('now LFSR')
 show_image(cifrados.write_image(lfsr_xor, img))
