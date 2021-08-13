@@ -1,9 +1,20 @@
+# Universidad del Valle de Guatemala
+# Cifrado de informacion
+# Lab 3
+# Julio Herrera
+# Bryann Alfaro
+# Diego Arredondo
+
+#Referencia
+#Algoritmos de clase
+#https://en.wikipedia.org/wiki/Linear_congruential_generator
+#https://en.wikipedia.org/wiki/Wichmann%E2%80%93Hill
+#https://en.wikipedia.org/wiki/Linear-feedback_shift_register
+
 import numpy as np
 
 # Linear congruential generator
 # seed, a, b, N and size must be positive int values
-
-
 def lgc(a, b, N, seed, size):
     k = 1  # ultimos bits a tomar
     t = int(size / k)  # cantidad de iteraciones
@@ -16,8 +27,6 @@ def lgc(a, b, N, seed, size):
     return cadena
 
 # Wichman-Hill generator
-
-
 def wichman(s1, s2, s3, size):
     k = 1
     t = int(size/k)
@@ -32,7 +41,6 @@ def wichman(s1, s2, s3, size):
     return s
 
 # LSFR generator
-
 def lfsr(seed, taps, nbits):
     rbits = ''
     state = seed
@@ -48,7 +56,6 @@ def lfsr(seed, taps, nbits):
 # converts image to bits
 # receives an opened PIL image on "L" mode (8 bits)
 # returns a full string of bits
-
 def read_image(image):
     image = np.array(image)
     width, height = image.shape
@@ -61,8 +68,6 @@ def read_image(image):
 # converts bits to image
 # receives a full string of bits
 # returns a numpy array with 8 bits values per pixel
-
-
 def write_image(bits, image):
     imgArray = np.empty(int(len(bits)/8), dtype=np.uint8)
     for i in range(int(len(bits)/8)):
@@ -72,7 +77,5 @@ def write_image(bits, image):
 
 # xor two strings of bits
 # returns a string of bits
-
-
 def xor(bits1, bits2):
     return ''.join(str(int(bits1[i]) ^ int(bits2[i])) for i in range(len(bits1)))
